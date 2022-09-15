@@ -1,0 +1,20 @@
+# docker compose file for mysql 5.7
+version: '3.1'
+
+services:
+  db:
+    image: mysql:5.7
+    command: --init-file /sql/init.sql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+    volumes:
+      - ./src/main/resources/sql/:/sql
+    ports:
+      - "3306:3306"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
